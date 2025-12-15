@@ -1,0 +1,12 @@
+.textAlign{
+    font-size: 16px !important;
+}
+.toggleButton{
+    display: flex;
+   
+}
+.center{
+    display:flex !important;
+    justify-content: center;
+    align-items: center;
+}
