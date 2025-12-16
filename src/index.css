@@ -5,8 +5,53 @@
     display: flex;
    
 }
+.smallText{
+    font-size: 12px;
+    margin-left: 15px;
+    color:grey;
+}
 .center{
     display:flex !important;
     justify-content: center;
     align-items: center;
+}
+
+.floating-label {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.floating-label input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+.floating-label label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(124, 123, 123);
+  font-size: 16px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: white;
+  padding: 0 4px;
+}
+
+.floating-label input:focus,
+.floating-label input:not(:placeholder-shown) {
+
+}
+
+.floating-label input:focus ~ label,
+.floating-label input:not(:placeholder-shown) ~ label {
+  top: -1px; 
+  font-size: 13px; 
+    color: black;
+  border-radius: 10px; 
 }
