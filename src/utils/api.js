@@ -4,8 +4,8 @@ const apiFetch = async (url, options = {}) => {
   const accessToken = sessionStorage.getItem("accessToken");
 
   const defaultHeaders = {
-    "Content-Type": "application/json",
-    ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+    "Content-Type": "application/json", //Always sends JSON content type.
+    ...(accessToken && { Authorization: `Bearer ${accessToken}` }), //If an access token exists, adds Authorization header automatically:
   };
 const URL = import.meta.env.VITE_BACKEND_API_URL
   // First API request

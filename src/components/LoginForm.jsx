@@ -4,7 +4,9 @@ const LoginForm = ({ setAccessToken }) => {
   const [formData, setFormData] = useState({ identifier: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  //generic onchange- input handler catches all form input fields
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
@@ -15,7 +17,7 @@ const navigate = useNavigate();
     const phoneRegex = /^[0-9]{10,15}$/;
     return emailRegex.test(value) || phoneRegex.test(value);
   };
-const URL = import.meta.env.VITE_BACKEND_API_URL
+  const URL = import.meta.env.VITE_BACKEND_API_URL;
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -58,7 +60,7 @@ const URL = import.meta.env.VITE_BACKEND_API_URL
 
       // Reset form
       setFormData({ identifier: "", password: "" });
-      navigate("/dashboard")
+      navigate("/dashboard");
       form.classList.remove("was-validated");
     } catch (err) {
       console.error(err);
