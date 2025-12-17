@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,19 +9,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const RegistrationPage = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div>
       <div>
         <div className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-3 shadow toggleButton">
-          <h3 className="text-white">User Management</h3>
+          <h3 className="text-white">Client Page</h3>
           <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"></a>
           <button
-            className="navbar-toggler d-md-none collapsed"
+            className="navbar-toggler d-md-none"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
             aria-controls="sidebarMenu"
-            aria-expanded="false"
+            aria-expanded={sidebarOpen}
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
@@ -33,7 +34,9 @@ const RegistrationPage = () => {
         <div className="row">
           <nav
             id="sidebarMenu"
-            className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+            className={`col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ${
+              sidebarOpen ? "show" : ""
+            }`}
           >
             <div className="position-sticky pt-3">
               <ul className="nav flex-column">

@@ -1,26 +1,33 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const LoginForm = ({ setAccessToken }) => {
-  const [formData, setFormData] = useState({ identifier: "", password: "" });
+
+const AdminLogin = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-const navigate = useNavigate();
+
+  const navigate = useNavigate();
+  const URL = import.meta.env.VITE_BACKEND_API_URL;
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const isValidEmailOrPhone = (value) => {
+  const isValidEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const phoneRegex = /^[0-9]{10,15}$/;
-    return emailRegex.test(value) || phoneRegex.test(value);
+    return emailRegex.test(value);
   };
-const URL = import.meta.env.VITE_BACKEND_API_URL
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
 
-    if (!isValidEmailOrPhone(formData.identifier)) {
+    if (!isValidEmail(formData.username)) {
       form.classList.add("was-validated");
       return;
     }
@@ -35,30 +42,29 @@ const URL = import.meta.env.VITE_BACKEND_API_URL
     setError("");
 
     try {
-      const res = await fetch(`${URL}/api/auth/login`, {
+      const res = await fetch(`${URL}/api/auth/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // receive HTTP-only cookie
-        body: JSON.stringify(formData),
+        credentials: "include",
+       body: JSON.stringify({
+  identifier: formData.username, 
+  password: formData.password
+}),
+
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "Login failed");
-        setLoading(false);
+        setError(data.message || "Admin login failed");
         return;
       }
 
-      // Store access token
+      // Store JWT
       sessionStorage.setItem("accessToken", data.accessToken);
-      if (setAccessToken) setAccessToken(data.accessToken);
 
-      console.log("Login successful:", data.user);
-
-      // Reset form
-      setFormData({ identifier: "", password: "" });
-      navigate("/dashboard")
+      // Navigate to admin dashboard
+      navigate("/admin/dashboard");
       form.classList.remove("was-validated");
     } catch (err) {
       console.error(err);
@@ -69,7 +75,13 @@ const URL = import.meta.env.VITE_BACKEND_API_URL
   };
 
   return (
+    <div className=" p-3 center" style={{height:"85vh"}}>
+      <div className="d-flex  p-3 ">
+      <div className="container center mt-4 bg-dark" style={{borderTopLeftRadius:"25px",borderBottomLeftRadius:"25px"}}>
+        <h4 className="text-light fw-bolder" >Super Admin Login</h4>
+      </div>
     <div className="container mt-4">
+      
       <div>
         <span
           className="bg-dark fw-bold"
@@ -82,7 +94,7 @@ const URL = import.meta.env.VITE_BACKEND_API_URL
             padding: "3px",
           }}
         >
-          Login
+          Admin Login
         </span>
       </div>
 
@@ -98,30 +110,32 @@ const URL = import.meta.env.VITE_BACKEND_API_URL
           </div>
         )}
 
+        {/* Username */}
         <div className="col-md-12">
           <div className="floating-label">
             <input
-              type="text"
+              type="email"
               className={`form-control ${
-                formData.identifier && !isValidEmailOrPhone(formData.identifier)
+                formData.username && !isValidEmail(formData.username)
                   ? "is-invalid"
                   : ""
               }`}
-              id="identifier"
+              id="username"
               placeholder=""
               required
-              value={formData.identifier}
+              value={formData.username}
               onChange={handleChange}
             />
-            <label htmlFor="identifier" className="form-label">
-              Email or Phone
+            <label htmlFor="username" className="form-label">
+              Admin Email
             </label>
             <div className="invalid-feedback">
-              Enter a valid email or 10–15 digit phone number.
+              Enter a valid admin email.
             </div>
           </div>
         </div>
 
+        {/* Password */}
         <div className="col-md-12">
           <div className="floating-label">
             <input
@@ -143,14 +157,17 @@ const URL = import.meta.env.VITE_BACKEND_API_URL
           </div>
         </div>
 
+        {/* Submit */}
         <div className="col-12 center">
-          <button className="btn btn-primary" type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          <button className="btn btn-dark" type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login as Admin"}
           </button>
         </div>
       </form>
     </div>
+    </div>
+</div>
   );
 };
 
-export default LoginForm;
+export default AdminLogin;

@@ -34,7 +34,7 @@ const RegistrationForm = () => {
     const toast = new Toast(toastEl);
     toast.show();
   };
-
+const URL = import.meta.env.VITE_BACKEND_API_URL
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -58,7 +58,7 @@ const RegistrationForm = () => {
         }
       });
 
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${URL}/api/auth/register`, {
         method: "POST",
         body: data,
       });
