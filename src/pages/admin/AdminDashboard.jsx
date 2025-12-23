@@ -121,14 +121,13 @@ const AdminDashboard = () => {
 
 
   return (
-    <div className="container mt-4">
-      <h4>User Management panel</h4>
-      <div className="d-flex justify-content-between align-items-center mb-3 bg-dark text-white p-2">
-        <h4 className="fw-bold m-1">Admin Dashboard</h4>
-        <button className="btn btn-warning m-1" onClick={logoutAdmin}>
+    <div className="m-2" style={{backgroundColor:"whitesmoke"}}>
+       <div className="header m-1 rounded p-2">
+        <span className="fw-bold text-white m-2">User Management Application</span>
+ <button className="btn btn-warning m-1" onClick={logoutAdmin}>
           Logout
-        </button>
-      </div>
+        </button>      </div>
+      
 
       {/* Search by ID */}
       <div className="d-flex mb-3">
@@ -164,7 +163,7 @@ const AdminDashboard = () => {
       {/* Users Table */}
       <div className="table-responsive">
         <table className="table table-bordered table-sm">
-         <thead className="table-dark">
+         <thead>
   <tr>
     <th>ID</th>
     <th>Name</th>
@@ -286,6 +285,21 @@ const AdminDashboard = () => {
           </div>
         )}
       </div>
+      <div>
+ <footer
+  style={{
+    borderTop: "1px solid #ddd",
+    padding: "12px 0",
+    textAlign: "center",
+    marginTop: "40px",
+    fontSize: "14px",
+    color: "#555",
+  }}
+>
+  © {new Date().getFullYear()} Your Project Name. All rights reserved.
+</footer>
+
+</div>
     </div>
   );
 };

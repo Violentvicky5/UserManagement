@@ -75,21 +75,35 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className=" p-3 center" style={{height:"85vh"}}>
-      <div className="d-flex  p-3 ">
-      <div className="container center mt-4 bg-dark" style={{borderTopLeftRadius:"25px",borderBottomLeftRadius:"25px"}}>
-        <h4 className="text-light fw-bolder" >Super Admin Login</h4>
+    <div>
+      <div className="header ">
+        <span className="fw-bold text-white m-2">User Management Application</span>
+        <span className="fw-bold text-white m-2">Help</span>
       </div>
-    <div className="container mt-4">
+    <div className=" p-3 center" style={{height:"70vh"}}>
+      <div className="d-flex  p-3 border rounded-5 ">
+        
+      <div
+  className="container center mt-4 mb-4"
+  style={{
+    backgroundColor:"brown",
+    borderTopLeftRadius: "25px",
+    borderBottomLeftRadius: "25px",
+  }}
+>
+  <h4 className="text-white fw-bolder">Super Admin Login</h4>
+</div>
+
+    <div className="container mt-4 mb-4 ">
       
-      <div>
+      <div className="">
         <span
-          className="bg-dark fw-bold"
+          className="bg-white fw-bold p-1"
           style={{
             position: "relative",
             bottom: "4px",
             left: "25px",
-            color: "white",
+            
             borderRadius: "5px",
             padding: "3px",
           }}
@@ -159,7 +173,7 @@ const AdminLogin = () => {
 
         {/* Submit */}
         <div className="col-12 center">
-          <button className="btn btn-dark" type="submit" disabled={loading}>
+          <button className="btn_hover btn border fw-bolder text-black" type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login as Admin"}
           </button>
         </div>
@@ -167,6 +181,22 @@ const AdminLogin = () => {
     </div>
     </div>
 </div>
+<div>
+ <footer
+  style={{
+    borderTop: "1px solid #ddd",
+    padding: "12px 0",
+    textAlign: "center",
+    marginTop: "40px",
+    fontSize: "14px",
+    color: "#555",
+  }}
+>
+  © {new Date().getFullYear()} Your Project Name. All rights reserved.
+</footer>
+
+</div>
+  </div>
   );
 };
 
